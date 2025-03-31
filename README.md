@@ -1,1 +1,1 @@
-# The-Sandbox-Lite
+# Sandbox Lite
