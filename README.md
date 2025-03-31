@@ -4,4 +4,4 @@ The Sandbox Lite was inspired by The Powder Toy. The Sandbox Lite is a free phys
 
 # Building instructions
 
-In order to compile the project SFML is needed. The compilation process is handled by CMake.
+SFML is required. The compilation process is handled by CMake.
