@@ -1,0 +1,3 @@
+/home/matveka/projects/The-Sandbox-Lite/build/CMakeFiles/TheSandboxLite.dir
+/home/matveka/projects/The-Sandbox-Lite/build/CMakeFiles/edit_cache.dir
+/home/matveka/projects/The-Sandbox-Lite/build/CMakeFiles/rebuild_cache.dir

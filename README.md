@@ -4,4 +4,5 @@ The Sandbox Lite was inspired by The Powder Toy. The Sandbox Lite is a free phys
 
 # Building instructions
 
-SFML is required. The compilation process is handled by CMake.
+SFML is required. In order to install SFML do `sudo apt install libsfml-dev`.
+To compile the project create a folder by `mkdir build`, switch to it by `cd build` and do `cmake ..`, `cmake --build .`. This will create an executable file called `TheSandboxLite`.
