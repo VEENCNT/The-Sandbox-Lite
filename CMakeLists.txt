@@ -6,7 +6,9 @@ project(${project})
 set(CMAKE_CXX_STANDARD 20)
 
 set(${project}_SOURCES
-        ${CMAKE_SOURCE_DIR}/source/main.cpp)
+        ${CMAKE_SOURCE_DIR}/source/main.cpp
+        ${CMAKE_SOURCE_DIR}/source/Cell.cpp
+        ${CMAKE_SOURCE_DIR}/source/Scene.cpp)
 
 set(${project}_HEADERS)
 
