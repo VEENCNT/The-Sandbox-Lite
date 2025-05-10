@@ -2,25 +2,28 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Cell.hpp"
+#include "Element.hpp"
 
 namespace Sandbox {
-class Scene: public sf::Drawable {
+class Scene : public sf::Drawable {
  public:
     Scene();
 
-	Cell& getCell(int x, int y);
+    void update();
 
-	void update();
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    Element& getElement(int x, int y);
 
-    static const int kDefaultWidth = 80;
-    static const int kDefaultHeight = 60;
+    static const int kDefaultWidth = 144;
+    static const int kDefaultHeight = 90;
 
  private:
     void updateSand(int x, int y);
+    void updateWater(int x, int y);
 
-    Cell grid[kDefaultWidth][kDefaultHeight];
+    void updateVelocity(int x, int y);
+
+    Element grid[kDefaultWidth][kDefaultHeight];
 };
 }  // namespace Sandbox

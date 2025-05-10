@@ -10,22 +10,19 @@ enum Material {
     None
 };
 
-class Cell : public sf::Drawable, public sf::Transformable {
+class Element : public sf::Drawable, public sf::Transformable {
  public:
-    Cell();
+    Element();
 
     const Material& getMaterial() const;
     void setMaterial(const Material& material);
 
-    const sf::Vector2f& getVelocity() const;
-    void setVelocity(const sf::Vector2f& velocity);
+    bool getUpdateStatus();
+    void setUpdateStatus(bool isUpdated);
 
-    bool isUpdated();
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-    void update();
-    void reset();
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    static void swapMaterials(Element& first, Element& second);
 
     static const int kDefaultWidth = 10;
     static const int kDefaultHeight = 10;
@@ -34,7 +31,6 @@ class Cell : public sf::Drawable, public sf::Transformable {
     sf::RectangleShape shape;
     Material material;
 
-    sf::Vector2f velocity;
-    bool updated;
+    bool isUpdated;
 };
 }  // namespace Sandbox

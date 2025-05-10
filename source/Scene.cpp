@@ -1,36 +1,36 @@
 #include "../include/Scene.hpp"
 
 #include <algorithm>
+#include <iostream>
 
 namespace Sandbox {
 Scene::Scene() {
-    for (int i = 0; i < kDefaultWidth; ++i) {
-        for (int j = 0; j < kDefaultHeight; ++j) {
-            grid[i][j].setPosition(sf::Vector2f(Cell::kDefaultWidth * i, Cell::kDefaultHeight * j));
+    for (int x = 0; x < kDefaultWidth; ++x) {
+        for (int y = 0; y < kDefaultHeight; ++y) {
+            grid[x][y].setPosition(sf::Vector2f(Element::kDefaultWidth * x, Element::kDefaultHeight * y));
         }
     }
-}
-
-Cell& Scene::getCell(int x, int y) {
-    return grid[x][y];
 }
 
 void Scene::update() {
-    for (int i = 0; i < kDefaultWidth; ++i) {
-        for (int j = 0; j < kDefaultHeight; ++j) {
-            grid[i][j].reset();
+    for (int x = 0; x < kDefaultWidth; ++x) {
+        for (int y = 0; y < kDefaultHeight; ++y) {
+            grid[x][y].setUpdateStatus(false);
         }
     }
 
-    for (int i = 0; i < kDefaultWidth; ++i) {
-        for (int j = 0; j < kDefaultHeight; ++j) {
-            if (grid[i][j].isUpdated()) {
+    for (int x = 0; x < kDefaultWidth; ++x) {
+        for (int y = 0; y < kDefaultHeight; ++y) {
+            if (grid[x][y].getUpdateStatus()) {
                 continue;
             }
 
-            switch (grid[i][j].getMaterial()) {
+            switch (grid[x][y].getMaterial()) {
                 case Material::Sand:
-                    updateSand(i, j);
+                    updateSand(x, y);
+                    break;
+                case Material::Water:
+                    updateWater(x, y);
                     break;
                 default:
                     break;
@@ -39,88 +39,75 @@ void Scene::update() {
     }
 }
 
-void Scene::updateSand(int x, int y) {
-    if (y + 1 >= kDefaultHeight) {
-        grid[x][y].update();
-        return;
-    }
-
-    if (x == 0) {
-        if (grid[x][y + 1].getMaterial() == Material::None) {
-            grid[x][y].setMaterial(Material::None);
-            grid[x][y].update();
-
-            grid[x][y + 1].setMaterial(Material::Sand);
-            grid[x][y + 1].update();
-
-            return;
-        } else if (grid[x + 1][y + 1].getMaterial() == Material::None) {
-            grid[x][y].setMaterial(Material::None);
-            grid[x][y].update();
-
-            grid[x + 1][y + 1].setMaterial(Material::Sand);
-            grid[x + 1][y + 1].update();
-
-            return;
-        }
-    }
-
-    if (x == kDefaultWidth - 1) {
-        if (grid[x][y + 1].getMaterial() == Material::None) {
-            grid[x][y].setMaterial(Material::None);
-            grid[x][y].update();
-
-            grid[x][y + 1].setMaterial(Material::Sand);
-            grid[x][y + 1].update();
-
-            return;
-        } else if (grid[x - 1][y + 1].getMaterial() == Material::None) {
-            grid[x][y].setMaterial(Material::None);
-            grid[x][y].update();
-
-            grid[x - 1][y + 1].setMaterial(Material::Sand);
-            grid[x - 1][y + 1].update();
-
-            return;
-        }
-    }
-
-    if ((x > 0) && (x < kDefaultWidth - 1)) {
-        if (grid[x][y + 1].getMaterial() == Material::None) {
-            grid[x][y].setMaterial(Material::None);
-            grid[x][y].update();
-
-            grid[x][y + 1].setMaterial(Material::Sand);
-            grid[x][y + 1].update();
-
-            return;
-        } else if (grid[x + 1][y + 1].getMaterial() == Material::None) {
-            grid[x][y].setMaterial(Material::None);
-            grid[x][y].update();
-
-            grid[x + 1][y + 1].setMaterial(Material::Sand);
-            grid[x + 1][y + 1].update();
-
-            return;
-        } else if (grid[x - 1][y + 1].getMaterial() == Material::None) {
-            grid[x][y].setMaterial(Material::None);
-            grid[x][y].update();
-
-            grid[x - 1][y + 1].setMaterial(Material::Sand);
-            grid[x - 1][y + 1].update();
-
-            return;
-        }
-    }
-
-    grid[x][y].update();
-}
-
 void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    for (int i = 0; i < kDefaultWidth; ++i) {
-        for (int j = 0; j < kDefaultHeight; ++j) {
-            target.draw(grid[i][j]);
+    for (int x = 0; x < kDefaultWidth; ++x) {
+        for (int y = 0; y < kDefaultHeight; ++y) {
+            target.draw(grid[x][y]);
         }
     }
 }
+
+Element& Scene::getElement(int x, int y) {
+    return grid[x][y];
+}
+
+void Scene::updateSand(int x, int y) {
+    int nextX = x;
+    int nextY = y;
+
+    if (x > 0 && x < kDefaultWidth - 1 && y + 1 < kDefaultHeight && grid[x][y + 1].getMaterial() == Material::None) {
+        nextX = x;
+        nextY = y + 1;
+    } else if (x + 1 < kDefaultWidth && y + 1 < kDefaultHeight && grid[x + 1][y + 1].getMaterial() == Material::None) {
+        nextX = x + 1;
+        nextY = y + 1;
+    } else if (x > 0 && y + 1 < kDefaultHeight && grid[x - 1][y + 1].getMaterial() == Material::None) {
+        nextX = x - 1;
+        nextY = y + 1;
+    }
+
+    if (x > 0 && x < kDefaultWidth - 1 && y + 1 < kDefaultHeight && grid[x][y + 1].getMaterial() == Material::Water) {
+        nextX = x;
+        nextY = y + 1;
+    } else if (x + 1 < kDefaultWidth && y + 1 < kDefaultHeight && grid[x + 1][y + 1].getMaterial() == Material::Water) {
+        nextX = x + 1;
+        nextY = y + 1;
+    } else if (x > 0 && y + 1 < kDefaultHeight && grid[x - 1][y + 1].getMaterial() == Material::Water) {
+        nextX = x - 1;
+        nextY = y + 1;
+    }
+
+    Element::swapMaterials(grid[x][y], grid[nextX][nextY]);
+
+    grid[x][y].setUpdateStatus(true);
+    grid[nextX][nextY].setUpdateStatus(true);
+}
+
+void Scene::updateWater(int x, int y) {
+    int nextX = x;
+    int nextY = y;
+
+    if (x > 0 && x < kDefaultWidth - 1 && y + 1 < kDefaultHeight && grid[x][y + 1].getMaterial() == Material::None) {
+        nextX = x;
+        nextY = y + 1;
+    } else if (x + 1 < kDefaultWidth && y + 1 < kDefaultHeight && grid[x + 1][y + 1].getMaterial() == Material::None) {
+        nextX = x + 1;
+        nextY = y + 1;
+    } else if (x - 1 >= 0 && y + 1 < kDefaultHeight && grid[x - 1][y + 1].getMaterial() == Material::None) {
+        nextX = x - 1;
+        nextY = y + 1;
+    } else if (x + 1 < kDefaultWidth && grid[x + 1][y].getMaterial() == Material::None) {
+        nextX = x + 1;
+        nextY = y;
+    } else if (x - 1 >= 0 && grid[x - 1][y].getMaterial() == Material::None) {
+        nextX = x - 1;
+        nextY = y;
+    }
+
+    Element::swapMaterials(grid[x][y], grid[nextX][nextY]);
+
+    grid[x][y].setUpdateStatus(true);
+    grid[nextX][nextY].setUpdateStatus(true);
+}
+
 }  // namespace Sandbox
