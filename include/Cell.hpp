@@ -4,15 +4,22 @@
 
 namespace Sandbox {
 enum Material {
-    Sand,
     Stone,
+    Sand,
     Water,
+    Wick,
+    Gunpowder,
+    Diesel,
+    Fire,
+    DullFire,
+    Lava,
+    DullLava,
     None
 };
 
-class Element : public sf::Drawable, public sf::Transformable {
+class Cell : public sf::Drawable, public sf::Transformable {
  public:
-    Element();
+    Cell();
 
     const Material& getMaterial() const;
     void setMaterial(const Material& material);
@@ -20,9 +27,12 @@ class Element : public sf::Drawable, public sf::Transformable {
     bool getUpdateStatus();
     void setUpdateStatus(bool isUpdated);
 
+    int getHealth() const;
+    void setHealth(int health);
+
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-    static void swapMaterials(Element& first, Element& second);
+    static void swap(Cell& first, Cell& second);
 
     static const int kDefaultWidth = 10;
     static const int kDefaultHeight = 10;
@@ -32,5 +42,7 @@ class Element : public sf::Drawable, public sf::Transformable {
     Material material;
 
     bool isUpdated;
+
+    int health;
 };
 }  // namespace Sandbox
