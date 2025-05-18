@@ -27,6 +27,7 @@ class Scene : public sf::Drawable {
 	void updateDiesel(int x, int y);
     void updateFire(int x, int y);
 	void updateLava(int x, int y);
+    void updateSmoke(int x, int y);
 
 	inline bool isCorrectCoordinates(int x, int y);
 

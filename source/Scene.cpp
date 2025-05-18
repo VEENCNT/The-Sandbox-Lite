@@ -51,6 +51,12 @@ void Scene::update() {
                 case Material::DullLava:
                     updateLava(x, y);
                     break;
+                case Material::Smoke:
+                    updateSmoke(x, y);
+                    break;
+                case Material::DullSmoke:
+                    updateSmoke(x, y);
+                    break;
                 default:
                     break;
             }
@@ -176,11 +182,29 @@ void Scene::updateFire(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x, y - 1) && isCorrectMaterial(x, y - 1, Material::Water)) {
+        grid[x][y - 1].setHealth(grid[x][y - 1].getHealth() - 1);
+
+        if (grid[x][y - 1].getHealth() == 0) {
+            grid[x][y - 1].setMaterial(Material::Smoke);
+            grid[x][y - 1].setUpdateStatus(true);
+        }
+    }
+
     if (isCorrectCoordinates(x + 1, y - 1) && isCorrectMaterial(x + 1, y - 1, Material::Wick, Material::Gunpowder, Material::Diesel)) {
         grid[x + 1][y - 1].setHealth(grid[x + 1][y - 1].getHealth() - 1);
 
         if (grid[x + 1][y - 1].getHealth() == 0) {
             grid[x + 1][y - 1].setMaterial(Material::Fire);
+            grid[x + 1][y - 1].setUpdateStatus(true);
+        }
+    }
+
+    if (isCorrectCoordinates(x + 1, y - 1) && isCorrectMaterial(x + 1, y - 1, Material::Water)) {
+        grid[x + 1][y - 1].setHealth(grid[x + 1][y - 1].getHealth() - 1);
+
+        if (grid[x + 1][y - 1].getHealth() == 0) {
+            grid[x + 1][y - 1].setMaterial(Material::Smoke);
             grid[x + 1][y - 1].setUpdateStatus(true);
         }
     }
@@ -194,11 +218,29 @@ void Scene::updateFire(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x + 1, y) && isCorrectMaterial(x + 1, y, Material::Water)) {
+        grid[x + 1][y].setHealth(grid[x + 1][y].getHealth() - 1);
+
+        if (grid[x + 1][y].getHealth() == 0) {
+            grid[x + 1][y].setMaterial(Material::Smoke);
+            grid[x + 1][y].setUpdateStatus(true);
+        }
+    }
+
     if (isCorrectCoordinates(x + 1, y + 1) && isCorrectMaterial(x + 1, y + 1, Material::Wick, Material::Gunpowder, Material::Diesel)) {
         grid[x + 1][y + 1].setHealth(grid[x + 1][y + 1].getHealth() - 1);
 
         if (grid[x + 1][y + 1].getHealth() == 0) {
             grid[x + 1][y + 1].setMaterial(Material::Fire);
+            grid[x + 1][y + 1].setUpdateStatus(true);
+        }
+    }
+
+    if (isCorrectCoordinates(x + 1, y + 1) && isCorrectMaterial(x + 1, y + 1, Material::Water)) {
+        grid[x + 1][y + 1].setHealth(grid[x + 1][y + 1].getHealth() - 1);
+
+        if (grid[x + 1][y + 1].getHealth() == 0) {
+            grid[x + 1][y + 1].setMaterial(Material::Smoke);
             grid[x + 1][y + 1].setUpdateStatus(true);
         }
     }
@@ -212,11 +254,29 @@ void Scene::updateFire(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x, y + 1) && isCorrectMaterial(x, y + 1, Material::Water)) {
+        grid[x][y + 1].setHealth(grid[x][y + 1].getHealth() - 1);
+
+        if (grid[x][y + 1].getHealth() == 0) {
+            grid[x][y + 1].setMaterial(Material::Smoke);
+            grid[x][y + 1].setUpdateStatus(true);
+        }
+    }
+
     if (isCorrectCoordinates(x - 1, y + 1) && isCorrectMaterial(x - 1, y + 1, Material::Wick, Material::Gunpowder, Material::Diesel)) {
         grid[x - 1][y + 1].setHealth(grid[x - 1][y + 1].getHealth() - 1);
 
         if (grid[x - 1][y + 1].getHealth() == 0) {
             grid[x - 1][y + 1].setMaterial(Material::Fire);
+            grid[x - 1][y + 1].setUpdateStatus(true);
+        }
+    }
+
+    if (isCorrectCoordinates(x - 1, y + 1) && isCorrectMaterial(x - 1, y + 1, Material::Water)) {
+        grid[x - 1][y + 1].setHealth(grid[x - 1][y + 1].getHealth() - 1);
+
+        if (grid[x - 1][y + 1].getHealth() == 0) {
+            grid[x - 1][y + 1].setMaterial(Material::Smoke);
             grid[x - 1][y + 1].setUpdateStatus(true);
         }
     }
@@ -230,11 +290,29 @@ void Scene::updateFire(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x - 1, y) && isCorrectMaterial(x - 1, y, Material::Water)) {
+        grid[x - 1][y].setHealth(grid[x - 1][y].getHealth() - 1);
+
+        if (grid[x - 1][y].getHealth() == 0) {
+            grid[x - 1][y].setMaterial(Material::Smoke);
+            grid[x - 1][y].setUpdateStatus(true);
+        }
+    }
+
     if (isCorrectCoordinates(x - 1, y - 1) && isCorrectMaterial(x - 1, y - 1, Material::Wick, Material::Gunpowder, Material::Diesel)) {
         grid[x - 1][y - 1].setHealth(grid[x - 1][y - 1].getHealth() - 1);
 
         if (grid[x - 1][y - 1].getHealth() == 0) {
             grid[x - 1][y - 1].setMaterial(Material::Fire);
+            grid[x - 1][y - 1].setUpdateStatus(true);
+        }
+    }
+
+    if (isCorrectCoordinates(x - 1, y - 1) && isCorrectMaterial(x - 1, y - 1, Material::Water)) {
+        grid[x - 1][y - 1].setHealth(grid[x - 1][y - 1].getHealth() - 1);
+
+        if (grid[x - 1][y - 1].getHealth() == 0) {
+            grid[x - 1][y - 1].setMaterial(Material::Smoke);
             grid[x - 1][y - 1].setUpdateStatus(true);
         }
     }
@@ -271,6 +349,15 @@ void Scene::updateLava(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x, y - 1) && isCorrectMaterial(x, y - 1, Material::Water)) {
+        grid[x][y - 1].setHealth(grid[x][y - 1].getHealth() - 1);
+
+        if (grid[x][y - 1].getHealth() == 0) {
+            grid[x][y - 1].setMaterial(Material::Smoke);
+            grid[x][y - 1].setUpdateStatus(true);
+        }
+    }
+
     if (isCorrectCoordinates(x + 1, y - 1) && isCorrectMaterial(x + 1, y - 1, Material::Sand, Material::Stone)) {
         grid[x + 1][y - 1].setHealth(grid[x + 1][y - 1].getHealth() - 1);
 
@@ -285,6 +372,15 @@ void Scene::updateLava(int x, int y) {
 
         if (grid[x + 1][y - 1].getHealth() == 0) {
             grid[x + 1][y - 1].setMaterial(Material::Fire);
+            grid[x + 1][y - 1].setUpdateStatus(true);
+        }
+    }
+
+    if (isCorrectCoordinates(x + 1, y - 1) && isCorrectMaterial(x + 1, y - 1, Material::Water)) {
+        grid[x + 1][y - 1].setHealth(grid[x + 1][y - 1].getHealth() - 1);
+
+        if (grid[x + 1][y - 1].getHealth() == 0) {
+            grid[x + 1][y - 1].setMaterial(Material::Smoke);
             grid[x + 1][y - 1].setUpdateStatus(true);
         }
     }
@@ -307,6 +403,15 @@ void Scene::updateLava(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x + 1, y) && isCorrectMaterial(x + 1, y, Material::Water)) {
+        grid[x + 1][y].setHealth(grid[x + 1][y].getHealth() - 1);
+
+        if (grid[x + 1][y].getHealth() == 0) {
+            grid[x + 1][y].setMaterial(Material::Smoke);
+            grid[x + 1][y].setUpdateStatus(true);
+        }
+    }
+
     if (isCorrectCoordinates(x + 1, y + 1) && isCorrectMaterial(x + 1, y + 1, Material::Sand, Material::Stone)) {
         grid[x + 1][y + 1].setHealth(grid[x + 1][y + 1].getHealth() - 1);
 
@@ -321,6 +426,15 @@ void Scene::updateLava(int x, int y) {
 
         if (grid[x + 1][y + 1].getHealth() == 0) {
             grid[x + 1][y + 1].setMaterial(Material::Fire);
+            grid[x + 1][y + 1].setUpdateStatus(true);
+        }
+    }
+
+    if (isCorrectCoordinates(x + 1, y + 1) && isCorrectMaterial(x + 1, y + 1, Material::Water)) {
+        grid[x + 1][y + 1].setHealth(grid[x + 1][y + 1].getHealth() - 1);
+
+        if (grid[x + 1][y + 1].getHealth() == 0) {
+            grid[x + 1][y + 1].setMaterial(Material::Smoke);
             grid[x + 1][y + 1].setUpdateStatus(true);
         }
     }
@@ -343,6 +457,15 @@ void Scene::updateLava(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x, y + 1) && isCorrectMaterial(x, y + 1, Material::Water)) {
+        grid[x][y + 1].setHealth(grid[x][y + 1].getHealth() - 1);
+
+        if (grid[x][y + 1].getHealth() == 0) {
+            grid[x][y + 1].setMaterial(Material::Smoke);
+            grid[x][y + 1].setUpdateStatus(true);
+        }
+    }
+
     if (isCorrectCoordinates(x - 1, y + 1) && isCorrectMaterial(x - 1, y + 1, Material::Sand, Material::Stone)) {
         grid[x - 1][y + 1].setHealth(grid[x - 1][y + 1].getHealth() - 1);
 
@@ -357,6 +480,15 @@ void Scene::updateLava(int x, int y) {
 
         if (grid[x - 1][y + 1].getHealth() == 0) {
             grid[x - 1][y + 1].setMaterial(Material::Fire);
+            grid[x - 1][y + 1].setUpdateStatus(true);
+        }
+    }
+
+    if (isCorrectCoordinates(x - 1, y + 1) && isCorrectMaterial(x - 1, y + 1, Material::Water)) {
+        grid[x - 1][y + 1].setHealth(grid[x - 1][y + 1].getHealth() - 1);
+
+        if (grid[x - 1][y + 1].getHealth() == 0) {
+            grid[x - 1][y + 1].setMaterial(Material::Smoke);
             grid[x - 1][y + 1].setUpdateStatus(true);
         }
     }
@@ -379,6 +511,15 @@ void Scene::updateLava(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x - 1, y) && isCorrectMaterial(x - 1, y, Material::Water)) {
+        grid[x - 1][y].setHealth(grid[x - 1][y].getHealth() - 1);
+
+        if (grid[x - 1][y].getHealth() == 0) {
+            grid[x - 1][y].setMaterial(Material::Smoke);
+            grid[x - 1][y].setUpdateStatus(true);
+        }
+    }
+
     if (isCorrectCoordinates(x - 1, y - 1) && isCorrectMaterial(x - 1, y - 1, Material::Sand, Material::Stone)) {
         grid[x - 1][y - 1].setHealth(grid[x - 1][y - 1].getHealth() - 1);
 
@@ -393,6 +534,15 @@ void Scene::updateLava(int x, int y) {
 
         if (grid[x - 1][y - 1].getHealth() == 0) {
             grid[x - 1][y - 1].setMaterial(Material::Fire);
+            grid[x - 1][y - 1].setUpdateStatus(true);
+        }
+    }
+
+    if (isCorrectCoordinates(x - 1, y - 1) && isCorrectMaterial(x - 1, y - 1, Material::Water)) {
+        grid[x - 1][y - 1].setHealth(grid[x - 1][y - 1].getHealth() - 1);
+
+        if (grid[x - 1][y - 1].getHealth() == 0) {
+            grid[x - 1][y - 1].setMaterial(Material::Smoke);
             grid[x - 1][y - 1].setUpdateStatus(true);
         }
     }
@@ -423,6 +573,46 @@ void Scene::updateLava(int x, int y) {
         nextX = x + 1;
         nextY = y;
     } else if (isCorrectCoordinates(x - 1, y) && isCorrectMaterial(x - 1, y, Material::None)) {
+        nextX = x - 1;
+        nextY = y;
+    }
+
+    Cell::swap(grid[x][y], grid[nextX][nextY]);
+
+    grid[x][y].setUpdateStatus(false);
+    grid[nextX][nextY].setUpdateStatus(true);
+}
+
+void Scene::updateSmoke(int x, int y) {
+    grid[x][y].setHealth(grid[x][y].getHealth() - 1);
+
+    if (grid[x][y].getHealth() == 80) {
+        grid[x][y].setMaterial(Material::DullSmoke);
+    }
+
+    if (grid[x][y].getHealth() == 0) {
+        grid[x][y].setMaterial(Material::None);
+        grid[x][y].setUpdateStatus(false);
+
+        return;
+    }
+
+    int nextX = x;
+    int nextY = y;
+
+    if (isCorrectCoordinates(x, y - 1) && isCorrectMaterial(x, y - 1, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+        nextX = x;
+        nextY = y - 1;
+    } else if (isCorrectCoordinates(x + 1, y - 1) && isCorrectMaterial(x + 1, y - 1, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+        nextX = x + 1;
+        nextY = y - 1;
+    } else if (isCorrectCoordinates(x - 1, y - 1) && isCorrectMaterial(x - 1, y - 1, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+        nextX = x - 1;
+        nextY = y - 1;
+    } else if (isCorrectCoordinates(x + 1, y) && isCorrectMaterial(x + 1, y, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+        nextX = x + 1;
+        nextY = y;
+    } else if (isCorrectCoordinates(x - 1, y) && isCorrectMaterial(x - 1, y, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
         nextX = x - 1;
         nextY = y;
     }

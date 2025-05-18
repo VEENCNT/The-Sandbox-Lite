@@ -14,6 +14,8 @@ enum Material {
     DullFire,
     Lava,
     DullLava,
+    Smoke,
+    DullSmoke,
     None
 };
 
