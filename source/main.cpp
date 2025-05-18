@@ -1,13 +1,23 @@
-#include <vector>
 #include <iostream>
+#include <string>
 
 #include "../include/Scene.hpp"
 #include "../include/Cell.hpp"
 
 int main() {
-    sf::RenderWindow window{sf::VideoMode(1440, 900), "The Sandbox Lite"};
+    sf::RenderWindow window{sf::VideoMode(1280, 900), "The Sandbox Lite"};
 
     Sandbox::Scene scene{};
+
+    sf::Font font;
+    font.loadFromFile("../arial.ttf");
+
+    sf::Text text;
+    text.setFont(font);
+    text.setCharacterSize(12);
+    text.setFillColor(sf::Color::White);
+
+    sf::Clock clock{};
 
     while (window.isOpen()) {
         sf::Event event;
@@ -36,7 +46,7 @@ int main() {
             int j = mousePosition.y / Sandbox::Cell::kDefaultHeight;
 
             if (i > 0 && i < Sandbox::Scene::kDefaultWidth && j > 0 && j < Sandbox::Scene::kDefaultHeight) {
-                scene.getElement(i, j).setMaterial(Sandbox::Material::Lava);
+                scene.getElement(i, j).setMaterial(Sandbox::Material::Fire);
             }
         }
 
@@ -44,9 +54,16 @@ int main() {
 
         scene.update();
 
+        sf::Time elapsed = clock.restart();
+
+        text.setString(std::to_string(1 / elapsed.asSeconds()));
+
         window.draw(scene);
 
+        window.draw(text);
+
         window.display();
+
     }
 
     return 0;

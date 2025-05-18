@@ -4,7 +4,7 @@
 
 namespace Sandbox {
 enum Material {
-    Stone,
+    Stone = 1,
     Sand,
     Water,
     Wick,
@@ -21,13 +21,13 @@ class Cell : public sf::Drawable, public sf::Transformable {
  public:
     Cell();
 
-    const Material& getMaterial() const;
+    inline const Material& getMaterial() const;
     void setMaterial(const Material& material);
 
-    bool getUpdateStatus();
+    inline bool getUpdateStatus() const;
     void setUpdateStatus(bool isUpdated);
 
-    int getHealth() const;
+    inline int getHealth() const;
     void setHealth(int health);
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
@@ -45,4 +45,16 @@ class Cell : public sf::Drawable, public sf::Transformable {
 
     int health;
 };
+
+inline const Material& Cell::getMaterial() const {
+    return material;
+}
+
+inline bool Cell::getUpdateStatus() const {
+    return isUpdated;
+}
+
+inline int Cell::getHealth() const {
+    return health;
+}
 }  // namespace Sandbox

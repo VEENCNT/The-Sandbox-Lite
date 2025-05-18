@@ -7,10 +7,6 @@ Cell::Cell(): shape(sf::Vector2f(kDefaultWidth, kDefaultHeight)) {
     setUpdateStatus(false);
 }
 
-const Material& Cell::getMaterial() const {
-    return material;
-}
-
 void Cell::setMaterial(const Material& material) {
     this->material = material;
 
@@ -21,7 +17,7 @@ void Cell::setMaterial(const Material& material) {
             break;
         case Material::Sand:
             shape.setFillColor(sf::Color(252, 221, 118));
-            setHealth(400);
+            setHealth(100);
             break;
         case Material::Water:
             shape.setFillColor(sf::Color(35, 137, 218));
@@ -40,18 +36,18 @@ void Cell::setMaterial(const Material& material) {
             setHealth(2);
             break;
         case Material::Fire:
-            shape.setFillColor(sf::Color(230, 38, 0));
+            shape.setFillColor(sf::Color(204, 170, 0));
             setHealth(10);
             break;
         case Material::DullFire:
-            shape.setFillColor(sf::Color(204, 170, 0));
+            shape.setFillColor(sf::Color(230, 38, 0));
             break;
         case Material::Lava:
-            shape.setFillColor(sf::Color(255, 16, 32));
+            shape.setFillColor(sf::Color(255, 66, 32));
             setHealth(100);
             break;
         case Material::DullLava:
-            shape.setFillColor(sf::Color(255, 66, 32));
+            shape.setFillColor(sf::Color(255, 16, 32));
             setHealth(100);
             break;
         case Material::None:
@@ -61,16 +57,8 @@ void Cell::setMaterial(const Material& material) {
     }
 }
 
-bool Cell::getUpdateStatus() {
-    return isUpdated;
-}
-
 void Cell::setUpdateStatus(bool isUpdated) {
     this->isUpdated = isUpdated;
-}
-
-int Cell::getHealth() const {
-    return health;
 }
 
 void Cell::setHealth(int lifetime) {
