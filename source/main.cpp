@@ -6,18 +6,28 @@
 
 int main() {
     sf::RenderWindow window{sf::VideoMode(1280, 900), "The Sandbox Lite"};
-
     window.setFramerateLimit(90);
 
     Sandbox::Scene scene{};
 
-    sf::Font font;
-    font.loadFromFile("../arial.ttf");
+    Sandbox::Material brushMaterial = Sandbox::Material::Stone;
 
-    sf::Text text;
-    text.setFont(font);
-    text.setCharacterSize(12);
-    text.setFillColor(sf::Color::White);
+    sf::Font font;
+    font.loadFromFile("../PixelizerBold.ttf");
+
+    sf::Text brushInfo;
+    brushInfo.setFont(font);
+    brushInfo.setStyle(sf::Text::Bold);
+    brushInfo.setCharacterSize(36);
+    brushInfo.setFillColor(sf::Color::White);
+    brushInfo.setPosition(sf::Vector2f(10.0f, 10.0f));
+    brushInfo.setString("Stone");
+
+    sf::Text fpsInfo;
+    fpsInfo.setFont(font);
+    fpsInfo.setCharacterSize(12);
+    fpsInfo.setFillColor(sf::Color::White);
+    fpsInfo.setPosition(sf::Vector2f(10.0f, 52.0f));
 
     sf::Clock clock{};
 
@@ -30,6 +40,46 @@ int main() {
             }
         }
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+            brushMaterial = Sandbox::Material::Stone;
+            brushInfo.setString("Stone");
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
+            brushMaterial = Sandbox::Material::Sand;
+            brushInfo.setString("Sand");
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F3)) {
+            brushMaterial = Sandbox::Material::Water;
+            brushInfo.setString("Water");
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F4)) {
+            brushMaterial = Sandbox::Material::Wick;
+            brushInfo.setString("Wick");
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
+            brushMaterial = Sandbox::Material::Gunpowder;
+            brushInfo.setString("Gunpowder");
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F6)) {
+            brushMaterial = Sandbox::Material::Diesel;
+            brushInfo.setString("Diesel");
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F7)) {
+            brushMaterial = Sandbox::Material::Fire;
+            brushInfo.setString("Fire");
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F8)) {
+            brushMaterial = Sandbox::Material::Lava;
+            brushInfo.setString("Lava");
+        }
+
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
@@ -37,7 +87,7 @@ int main() {
             int j = mousePosition.y / Sandbox::Cell::kDefaultHeight;
 
             if (i > 0 && i < Sandbox::Scene::kDefaultWidth && j > 0 && j < Sandbox::Scene::kDefaultHeight) {
-                scene.getElement(i, j).setMaterial(Sandbox::Material::Sand);
+                scene.getElement(i, j).setMaterial(brushMaterial);
             }
         }
 
@@ -48,7 +98,7 @@ int main() {
             int j = mousePosition.y / Sandbox::Cell::kDefaultHeight;
 
             if (i > 0 && i < Sandbox::Scene::kDefaultWidth && j > 0 && j < Sandbox::Scene::kDefaultHeight) {
-                scene.getElement(i, j).setMaterial(Sandbox::Material::Lava);
+                scene.getElement(i, j).setMaterial(Sandbox::Material::None);
             }
         }
 
@@ -58,11 +108,13 @@ int main() {
 
         sf::Time elapsed = clock.restart();
 
-        text.setString(std::to_string(1 / elapsed.asSeconds()));
+        fpsInfo.setString(std::to_string(1 / elapsed.asSeconds()));
 
         window.draw(scene);
 
-        window.draw(text);
+        window.draw(brushInfo);
+
+        window.draw(fpsInfo);
 
         window.display();
 
