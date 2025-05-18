@@ -152,10 +152,10 @@ void Scene::updateDiesel(int x, int y) {
     } else if (isCorrectCoordinates(x - 1, y + 1) && isCorrectMaterial(x - 1, y + 1, Material::None, Material::Water)) {
         nextX = x - 1;
         nextY = y + 1;
-    } else if (isCorrectCoordinates(x + 1, y) && isCorrectMaterial(x + 1, y, Material::None)) {
+    } else if (isCorrectCoordinates(x + 1, y) && isCorrectMaterial(x + 1, y, Material::None, Material::Water)) {
         nextX = x + 1;
         nextY = y;
-    } else if (isCorrectCoordinates(x - 1, y) && isCorrectMaterial(x - 1, y, Material::None)) {
+    } else if (isCorrectCoordinates(x - 1, y) && isCorrectMaterial(x - 1, y, Material::None, Material::Water)) {
         nextX = x - 1;
         nextY = y;
     }
@@ -241,7 +241,7 @@ void Scene::updateFire(int x, int y) {
 
     grid[x][y].setHealth(grid[x][y].getHealth() - 1);
 
-    if (grid[x][y].getHealth() <= 3) {
+    if (grid[x][y].getHealth() == 3) {
         grid[x][y].setMaterial(Material::DullFire);
     }
 

@@ -7,6 +7,8 @@
 int main() {
     sf::RenderWindow window{sf::VideoMode(1280, 900), "The Sandbox Lite"};
 
+    window.setFramerateLimit(90);
+
     Sandbox::Scene scene{};
 
     sf::Font font;
@@ -35,7 +37,7 @@ int main() {
             int j = mousePosition.y / Sandbox::Cell::kDefaultHeight;
 
             if (i > 0 && i < Sandbox::Scene::kDefaultWidth && j > 0 && j < Sandbox::Scene::kDefaultHeight) {
-                scene.getElement(i, j).setMaterial(Sandbox::Material::Wick);
+                scene.getElement(i, j).setMaterial(Sandbox::Material::Sand);
             }
         }
 
@@ -46,7 +48,7 @@ int main() {
             int j = mousePosition.y / Sandbox::Cell::kDefaultHeight;
 
             if (i > 0 && i < Sandbox::Scene::kDefaultWidth && j > 0 && j < Sandbox::Scene::kDefaultHeight) {
-                scene.getElement(i, j).setMaterial(Sandbox::Material::Fire);
+                scene.getElement(i, j).setMaterial(Sandbox::Material::Lava);
             }
         }
 

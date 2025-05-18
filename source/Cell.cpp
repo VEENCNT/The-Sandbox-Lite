@@ -41,6 +41,7 @@ void Cell::setMaterial(const Material& material) {
             break;
         case Material::DullFire:
             shape.setFillColor(sf::Color(230, 38, 0));
+            setHealth(3);
             break;
         case Material::Lava:
             shape.setFillColor(sf::Color(255, 66, 32));
