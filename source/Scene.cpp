@@ -600,19 +600,23 @@ void Scene::updateSmoke(int x, int y) {
     int nextX = x;
     int nextY = y;
 
-    if (isCorrectCoordinates(x, y - 1) && isCorrectMaterial(x, y - 1, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+    if (isCorrectCoordinates(x, y - 1) && !isCorrectMaterial(x, y - 1, Material::Stone, Material::Wick, Material::Smoke, Material::DullSmoke)) {
         nextX = x;
         nextY = y - 1;
-    } else if (isCorrectCoordinates(x + 1, y - 1) && isCorrectMaterial(x + 1, y - 1, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+    } else if (isCorrectCoordinates(x + 1, y - 1) &&
+               !isCorrectMaterial(x + 1, y - 1, Material::Stone, Material::Wick, Material::Smoke, Material::DullSmoke)) {
         nextX = x + 1;
         nextY = y - 1;
-    } else if (isCorrectCoordinates(x - 1, y - 1) && isCorrectMaterial(x - 1, y - 1, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+    } else if (isCorrectCoordinates(x - 1, y - 1) &&
+               !isCorrectMaterial(x - 1, y - 1, Material::Stone, Material::Wick, Material::Smoke, Material::DullSmoke)) {
         nextX = x - 1;
         nextY = y - 1;
-    } else if (isCorrectCoordinates(x + 1, y) && isCorrectMaterial(x + 1, y, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+    } else if (isCorrectCoordinates(x + 1, y) &&
+               !isCorrectMaterial(x + 1, y, Material::Stone, Material::Wick, Material::Smoke, Material::DullSmoke)) {
         nextX = x + 1;
         nextY = y;
-    } else if (isCorrectCoordinates(x - 1, y) && isCorrectMaterial(x - 1, y, Material::None, Material::Sand, Material::Water, Material::Gunpowder, Material::Diesel, Material::Lava, Material::DullLava)) {
+    } else if (isCorrectCoordinates(x - 1, y) &&
+               !isCorrectMaterial(x - 1, y, Material::Stone, Material::Wick, Material::Smoke, Material::DullSmoke)) {
         nextX = x - 1;
         nextY = y;
     }
