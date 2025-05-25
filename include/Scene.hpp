@@ -29,8 +29,13 @@ class Scene : public sf::Drawable {
 	void updateLava(int x, int y);
     void updateSmoke(int x, int y);
     void updateAcid(int x, int y);
+    void updateMetal(int x, int y);
+    void updateMoltenMetal(int x, int y);
+    void updateRust(int x, int y);
 
-	inline bool isCorrectCoordinates(int x, int y);
+    bool checkNeighborsForMaterial(int x, int y, Material mat);
+
+    inline bool isCorrectCoordinates(int x, int y);
 
     inline bool isCorrectMaterial(int x, int y);
 

@@ -67,6 +67,18 @@ void Cell::setMaterial(const Material& material) {
             shape.setFillColor(sf::Color(30, 150, 30));
             setHealth(100);
             break;
+        case Material::Metal:
+            shape.setFillColor(sf::Color(150, 150, 150));
+            setHealth(500);
+            break;
+        case Material::MoltenMetal:
+            shape.setFillColor(sf::Color(255, 80, 0));
+            setHealth(100);
+            break;
+        case Material::Rust:
+            shape.setFillColor(sf::Color(175, 100, 50));
+            setHealth(50);
+            break;
         case Material::None:
             shape.setFillColor(sf::Color(0, 0, 0));
             setHealth(0);

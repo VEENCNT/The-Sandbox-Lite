@@ -63,6 +63,15 @@ void Scene::update() {
                 case Material::DullAcid:
                     updateAcid(x, y);
                     break;
+                case Material::Metal:
+                    updateMetal(x, y);
+                    break;
+                case Material::MoltenMetal:
+                    updateMoltenMetal(x, y);
+                    break;
+                case Material::Rust:
+                    updateRust(x, y);
+                    break;
                 default:
                     break;
             }
@@ -563,6 +572,34 @@ void Scene::updateLava(int x, int y) {
         }
     }
 
+    if (isCorrectCoordinates(x, y - 1) &&
+        isCorrectMaterial(x, y - 1, Material::Metal)) {
+        grid[x][y - 1].setHealth(grid[x][y - 1].getHealth() - 2);
+
+        if (grid[x][y - 1].getHealth() <= 0) {
+            grid[x][y - 1].setMaterial(Material::MoltenMetal);
+            grid[x][y - 1].setHealth(100);
+            grid[x][y - 1].setUpdateStatus(true);
+        }
+    }
+
+    for (int dx = -1; dx <= 1; dx++) {
+        for (int dy = -1; dy <= 1; dy++) {
+            if (dx == 0 && dy == 0) continue;
+
+            if (isCorrectCoordinates(x+dx, y+dy) &&
+                isCorrectMaterial(x+dx, y+dy, Material::Metal)) {
+                grid[x+dx][y+dy].setHealth(grid[x+dx][y+dy].getHealth() - 1);
+
+                if (grid[x+dx][y+dy].getHealth() <= 0) {
+                    grid[x+dx][y+dy].setMaterial(Material::MoltenMetal);
+                    grid[x+dx][y+dy].setHealth(100);
+                    grid[x+dx][y+dy].setUpdateStatus(true);
+                }
+            }
+        }
+    }
+
     int nextX = x;
     int nextY = y;
 
@@ -711,5 +748,61 @@ void Scene::updateAcid(int x, int y) {
     if(grid[nextX][nextY].getHealth() <= 0) {
         grid[nextX][nextY].setMaterial(Material::None);
     }
+}
+
+void Scene::updateMetal(int x, int y) {
+    if (checkNeighborsForMaterial(x, y, Material::Acid)) {
+        grid[x][y].setHealth(grid[x][y].getHealth() - 2);
+        if (grid[x][y].getHealth() <= 0) {
+            grid[x][y].setMaterial(Material::Rust);
+        }
+    }
+
+    if (checkNeighborsForMaterial(x, y, Material::Acid)) {
+        grid[x][y].setHealth(grid[x][y].getHealth() - 2);
+        if (grid[x][y].getHealth() <= 0) {
+            grid[x][y].setMaterial(Material::Rust);
+        }
+    }
+}
+
+void Scene::updateMoltenMetal(int x, int y) {
+    bool moved = false;
+    int dir = (rand() % 2) * 2 - 1;
+
+    if (isCorrectCoordinates(x, y + 1) && isCorrectMaterial(x, y + 1, Material::None)) {
+        Cell::swap(grid[x][y], grid[x][y + 1]);
+        moved = true;
+    } else if (isCorrectCoordinates(x + dir, y + 1) && isCorrectMaterial(x + dir, y + 1, Material::None)) {
+        Cell::swap(grid[x][y], grid[x + dir][y + 1]);
+        moved = true;
+    }
+
+    if (!moved) {
+        grid[x][y].setHealth(grid[x][y].getHealth() - 1);
+        if (grid[x][y].getHealth() <= 0) {
+            grid[x][y].setMaterial(Material::None);
+        }
+    }
+}
+
+void Scene::updateRust(int x, int y) {
+    grid[x][y].setHealth(grid[x][y].getHealth() - 1);
+    if (grid[x][y].getHealth() <= 0) {
+        grid[x][y].setMaterial(Material::None);
+    }
+}
+
+bool Scene::checkNeighborsForMaterial(int x, int y, Material mat) {
+    for (int dx = -1; dx <= 1; dx++) {
+        for (int dy = -1; dy <= 1; dy++) {
+            if (dx == 0 && dy == 0) continue;
+            if (isCorrectCoordinates(x + dx, y + dy) &&
+                grid[x + dx][y + dy].getMaterial() == mat) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 }  // namespace Sandbox

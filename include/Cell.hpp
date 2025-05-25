@@ -18,6 +18,9 @@ enum Material {
     DullSmoke,
     Acid,
     DullAcid,
+    Metal,
+    MoltenMetal,
+    Rust,
     None
 };
 
