@@ -59,14 +59,6 @@ void Cell::setMaterial(const Material& material) {
             shape.setFillColor(sf::Color(169, 169, 169));
             setHealth(80);
             break;
-        case Material::Acid:
-            shape.setFillColor(sf::Color(50, 255, 50));
-            setHealth(200);
-            break;
-        case Material::DullAcid:
-            shape.setFillColor(sf::Color(30, 150, 30));
-            setHealth(100);
-            break;
         case Material::None:
             shape.setFillColor(sf::Color(0, 0, 0));
             setHealth(0);
