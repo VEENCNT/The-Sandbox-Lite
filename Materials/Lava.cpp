@@ -227,6 +227,34 @@ void Sandbox::updateLava(Scene* scene, int x, int y) {
         }
     }
 
+    if (scene->isCorrectCoordinates(x, y - 1) &&
+        scene->isCorrectMaterial(x, y - 1, Mats::Metal)) {
+        scene->grid[x][y - 1].setHealth(scene->grid[x][y - 1].getHealth() - 2);
+
+        if (scene->grid[x][y - 1].getHealth() <= 0) {
+            scene->grid[x][y - 1].setMaterial(Mats::MoltenMetal);
+            scene->grid[x][y - 1].setHealth(100);
+            scene->grid[x][y - 1].setUpdateStatus(true);
+        }
+    }
+
+    for (int dx = -1; dx <= 1; dx++) {
+        for (int dy = -1; dy <= 1; dy++) {
+            if (dx == 0 && dy == 0) continue;
+
+            if (scene->isCorrectCoordinates(x+dx, y+dy) &&
+                scene->isCorrectMaterial(x+dx, y+dy, Mats::Metal)) {
+                scene->grid[x+dx][y+dy].setHealth(scene->grid[x+dx][y+dy].getHealth() - 1);
+
+                if (scene->grid[x+dx][y+dy].getHealth() <= 0) {
+                    scene->grid[x+dx][y+dy].setMaterial(Mats::MoltenMetal);
+                    scene->grid[x+dx][y+dy].setHealth(100);
+                    scene->grid[x+dx][y+dy].setUpdateStatus(true);
+                }
+            }
+        }
+    }
+
     int nextX = x;
     int nextY = y;
 

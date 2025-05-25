@@ -24,6 +24,7 @@ class Scene : public sf::Drawable {
     inline bool isCorrectMaterial(int x, int y);
     template<typename... Args>
     inline bool isCorrectMaterial(int x, int y, const Mats& material, const Args&... args);
+    bool checkNeighborsForMaterial(int x, int y, const Mats mat);
     Cell grid[kDefaultWidth][kDefaultHeight];
 };
 
@@ -36,6 +37,19 @@ inline bool Scene::isCorrectCoordinates(int x, int y) {
 }
 
 inline bool Scene::isCorrectMaterial(int x, int y) {
+    return false;
+}
+
+inline bool Scene::checkNeighborsForMaterial(int x, int y, const Mats mat) {
+    for (int dx = -1; dx <= 1; dx++) {
+        for (int dy = -1; dy <= 1; dy++) {
+            if (dx == 0 && dy == 0) continue;
+            if (isCorrectCoordinates(x + dx, y + dy) &&
+                grid[x + dx][y + dy].getMaterial() == mat) {
+                return true;
+            }
+        }
+    }
     return false;
 }
 

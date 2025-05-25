@@ -15,6 +15,10 @@ set(${project}_SOURCES
         Fire.cpp
         Lava.cpp
         Smoke.cpp
+        Acid.cpp
+        Metal.cpp
+        MoltenMetal.cpp
+        Rust.cpp
         None.cpp
 )
 

@@ -11,11 +11,17 @@
 #include "Materials/DullLava.hpp"
 #include "Materials/Smoke.hpp"
 #include "Materials/DullSmoke.hpp"
+#include "Materials/Acid.hpp"
+#include "Materials/DullAcid.hpp"
+#include "Materials/Metal.hpp"
+#include "Materials/MoltenMetal.hpp"
+#include "Materials/Rust.hpp"
 #include "Materials/None.hpp"
 #include "Cell.hpp"
 
 namespace Sandbox {
     constexpr const Material* Materials[] = {
+        &NONE,
         &STONE,
         &SAND,
         &WATER,
@@ -28,11 +34,15 @@ namespace Sandbox {
         &DULLLAVA,
         &SMOKE,
         &DULLSMOKE,
-        &NONE
+        &ACID,
+        &DULLACID,
+        &METAL,
+        &MOLTENMETAL,
+        &RUST
     };
 
     inline const Material* getMaterialProperties(Mats m) {
-        int id = static_cast<int>(m) - 1;
+        int id = static_cast<int>(m);
         if (id >= 0 && id < (sizeof(Materials)/sizeof(Materials[0])))
             return Materials[id];
         return nullptr;

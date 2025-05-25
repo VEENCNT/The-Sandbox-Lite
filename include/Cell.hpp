@@ -16,7 +16,12 @@ enum Mats : int {
     DullLava,
     Smoke,
     DullSmoke,
-    None
+    Acid,
+    DullAcid,
+    Metal,
+    MoltenMetal,
+    Rust,
+    None = 0
 };
 
 class Cell : public sf::Drawable, public sf::Transformable {
