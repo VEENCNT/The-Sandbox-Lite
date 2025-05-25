@@ -20,28 +20,11 @@ class Scene : public sf::Drawable {
     static const int kDefaultWidth = 128;
     static const int kDefaultHeight = 90;
 
- private:
-    void updateSand(int x, int y);
-    void updateWater(int x, int y);
-    void updateGunpowder(int x, int y);
-	void updateDiesel(int x, int y);
-    void updateFire(int x, int y);
-	void updateLava(int x, int y);
-    void updateSmoke(int x, int y);
-    void updateAcid(int x, int y);
-    void updateMetal(int x, int y);
-    void updateMoltenMetal(int x, int y);
-    void updateRust(int x, int y);
-
-    bool checkNeighborsForMaterial(int x, int y, Material mat);
-
     inline bool isCorrectCoordinates(int x, int y);
-
     inline bool isCorrectMaterial(int x, int y);
-
     template<typename... Args>
-    inline bool isCorrectMaterial(int x, int y, const Material& material, const Args&... args);
-
+    inline bool isCorrectMaterial(int x, int y, const Mats& material, const Args&... args);
+    bool checkNeighborsForMaterial(int x, int y, const Mats mat);
     Cell grid[kDefaultWidth][kDefaultHeight];
 };
 
@@ -57,8 +40,21 @@ inline bool Scene::isCorrectMaterial(int x, int y) {
     return false;
 }
 
+inline bool Scene::checkNeighborsForMaterial(int x, int y, const Mats mat) {
+    for (int dx = -1; dx <= 1; dx++) {
+        for (int dy = -1; dy <= 1; dy++) {
+            if (dx == 0 && dy == 0) continue;
+            if (isCorrectCoordinates(x + dx, y + dy) &&
+                grid[x + dx][y + dy].getMaterial() == mat) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 template<typename... Args>
-inline bool Scene::isCorrectMaterial(int x, int y, const Material& material, const Args&... args) {
+inline bool Scene::isCorrectMaterial(int x, int y, const Mats& material, const Args&... args) {
     return (grid[x][y].getMaterial() == material) || (isCorrectMaterial(x, y, args...));
 }
 }  // namespace Sandbox

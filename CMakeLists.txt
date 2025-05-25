@@ -14,8 +14,11 @@ find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
 
 set(${project}_SOURCE_LIST ${${project}_SOURCES})
 
+add_subdirectory(Materials)
+
 add_executable(${project} ${${project}_SOURCE_LIST})
 
+target_link_libraries(${project} Materials)
 target_link_libraries(${project} sfml-graphics)
 target_link_libraries(${project} sfml-window)
 target_link_libraries(${project} sfml-system)

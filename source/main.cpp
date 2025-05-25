@@ -10,7 +10,7 @@ int main() {
 
     Sandbox::Scene scene{};
 
-    Sandbox::Material brushMaterial = Sandbox::Material::Stone;
+    Sandbox::Mats brushMaterial = Sandbox::Mats::Stone;
 
     sf::Font font;
     font.loadFromFile("../PixelizerBold.ttf");
@@ -41,57 +41,57 @@ int main() {
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
-            brushMaterial = Sandbox::Material::Stone;
+            brushMaterial = Sandbox::Mats::Stone;
             brushInfo.setString("Stone");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
-            brushMaterial = Sandbox::Material::Sand;
+            brushMaterial = Sandbox::Mats::Sand;
             brushInfo.setString("Sand");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F3)) {
-            brushMaterial = Sandbox::Material::Water;
+            brushMaterial = Sandbox::Mats::Water;
             brushInfo.setString("Water");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F4)) {
-            brushMaterial = Sandbox::Material::Wick;
+            brushMaterial = Sandbox::Mats::Wick;
             brushInfo.setString("Wick");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
-            brushMaterial = Sandbox::Material::Gunpowder;
+            brushMaterial = Sandbox::Mats::Gunpowder;
             brushInfo.setString("Gunpowder");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F6)) {
-            brushMaterial = Sandbox::Material::Diesel;
+            brushMaterial = Sandbox::Mats::Diesel;
             brushInfo.setString("Diesel");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F7)) {
-            brushMaterial = Sandbox::Material::Fire;
+            brushMaterial = Sandbox::Mats::Fire;
             brushInfo.setString("Fire");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F8)) {
-            brushMaterial = Sandbox::Material::Lava;
+            brushMaterial = Sandbox::Mats::Lava;
             brushInfo.setString("Lava");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F9)) {
-            brushMaterial = Sandbox::Material::Smoke;
+            brushMaterial = Sandbox::Mats::Smoke;
             brushInfo.setString("Smoke");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F10)) {
-            brushMaterial = Sandbox::Material::Acid;
+            brushMaterial = Sandbox::Mats::Acid;
             brushInfo.setString("Acid");
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::F11)) {
-            brushMaterial = Sandbox::Material::Metal;
+            brushMaterial = Sandbox::Mats::Metal;
             brushInfo.setString("Metal");
         }
 
@@ -113,7 +113,7 @@ int main() {
             int j = mousePosition.y / Sandbox::Cell::kDefaultHeight;
 
             if (i > 0 && i < Sandbox::Scene::kDefaultWidth && j > 0 && j < Sandbox::Scene::kDefaultHeight) {
-                scene.getElement(i, j).setMaterial(Sandbox::Material::None);
+                scene.getElement(i, j).setMaterial(Sandbox::Mats::None);
             }
         }
 
