@@ -1,257 +1,54 @@
 #include "Lava.hpp"
 
-void Sandbox::updateLava(Scene* scene, int x, int y) {
-    if (scene->isCorrectCoordinates(x, y - 1) && scene->isCorrectMaterial(x, y - 1, Mats::Sand, Mats::Stone)) {
-        scene->grid[x][y - 1].setHealth(scene->grid[x][y - 1].getHealth() - 1);
-
-        if (scene->grid[x][y - 1].getHealth() == 0) {
-            scene->grid[x][y - 1].setMaterial(Mats::Lava);
-            scene->grid[x][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x, y - 1) && scene->isCorrectMaterial(x, y - 1, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
-        scene->grid[x][y - 1].setHealth(scene->grid[x][y - 1].getHealth() - 1);
-
-        if (scene->grid[x][y - 1].getHealth() == 0) {
-            scene->grid[x][y - 1].setMaterial(Mats::Fire);
-            scene->grid[x][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x, y - 1) && scene->isCorrectMaterial(x, y - 1, Mats::Water)) {
-        scene->grid[x][y - 1].setHealth(scene->grid[x][y - 1].getHealth() - 1);
-
-        if (scene->grid[x][y - 1].getHealth() == 0) {
-            scene->grid[x][y - 1].setMaterial(Mats::Smoke);
-            scene->grid[x][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y - 1) && scene->isCorrectMaterial(x + 1, y - 1, Mats::Sand, Mats::Stone)) {
-        scene->grid[x + 1][y - 1].setHealth(scene->grid[x + 1][y - 1].getHealth() - 1);
-
-        if (scene->grid[x + 1][y - 1].getHealth() == 0) {
-            scene->grid[x + 1][y - 1].setMaterial(Mats::Lava);
-            scene->grid[x + 1][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y - 1) && scene->isCorrectMaterial(x + 1, y - 1, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
-        scene->grid[x + 1][y - 1].setHealth(scene->grid[x + 1][y - 1].getHealth() - 1);
-
-        if (scene->grid[x + 1][y - 1].getHealth() == 0) {
-            scene->grid[x + 1][y - 1].setMaterial(Mats::Fire);
-            scene->grid[x + 1][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y - 1) && scene->isCorrectMaterial(x + 1, y - 1, Mats::Water)) {
-        scene->grid[x + 1][y - 1].setHealth(scene->grid[x + 1][y - 1].getHealth() - 1);
-
-        if (scene->grid[x + 1][y - 1].getHealth() == 0) {
-            scene->grid[x + 1][y - 1].setMaterial(Mats::Smoke);
-            scene->grid[x + 1][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y) && scene->isCorrectMaterial(x + 1, y, Mats::Sand, Mats::Stone)) {
-        scene->grid[x + 1][y].setHealth(scene->grid[x + 1][y].getHealth() - 1);
-
-        if (scene->grid[x + 1][y].getHealth() == 0) {
-            scene->grid[x + 1][y].setMaterial(Mats::Lava);
-            scene->grid[x + 1][y].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y) && scene->isCorrectMaterial(x + 1, y, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
-        scene->grid[x + 1][y].setHealth(scene->grid[x + 1][y].getHealth() - 1);
-
-        if (scene->grid[x + 1][y].getHealth() == 0) {
-            scene->grid[x + 1][y].setMaterial(Mats::Fire);
-            scene->grid[x + 1][y].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y) && scene->isCorrectMaterial(x + 1, y, Mats::Water)) {
-        scene->grid[x + 1][y].setHealth(scene->grid[x + 1][y].getHealth() - 1);
-
-        if (scene->grid[x + 1][y].getHealth() == 0) {
-            scene->grid[x + 1][y].setMaterial(Mats::Smoke);
-            scene->grid[x + 1][y].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y + 1) && scene->isCorrectMaterial(x + 1, y + 1, Mats::Sand, Mats::Stone)) {
-        scene->grid[x + 1][y + 1].setHealth(scene->grid[x + 1][y + 1].getHealth() - 1);
-
-        if (scene->grid[x + 1][y + 1].getHealth() == 0) {
-            scene->grid[x + 1][y + 1].setMaterial(Mats::Lava);
-            scene->grid[x + 1][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y + 1) && scene->isCorrectMaterial(x + 1, y + 1, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
-        scene->grid[x + 1][y + 1].setHealth(scene->grid[x + 1][y + 1].getHealth() - 1);
-
-        if (scene->grid[x + 1][y + 1].getHealth() == 0) {
-            scene->grid[x + 1][y + 1].setMaterial(Mats::Fire);
-            scene->grid[x + 1][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x + 1, y + 1) && scene->isCorrectMaterial(x + 1, y + 1, Mats::Water)) {
-        scene->grid[x + 1][y + 1].setHealth(scene->grid[x + 1][y + 1].getHealth() - 1);
-
-        if (scene->grid[x + 1][y + 1].getHealth() == 0) {
-            scene->grid[x + 1][y + 1].setMaterial(Mats::Smoke);
-            scene->grid[x + 1][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x, y + 1) && scene->isCorrectMaterial(x, y + 1, Mats::Sand, Mats::Stone)) {
-        scene->grid[x][y + 1].setHealth(scene->grid[x][y + 1].getHealth() - 1);
-
-        if (scene->grid[x][y + 1].getHealth() == 0) {
-            scene->grid[x][y + 1].setMaterial(Mats::Lava);
-            scene->grid[x][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x, y + 1) && scene->isCorrectMaterial(x, y + 1, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
-        scene->grid[x][y + 1].setHealth(scene->grid[x][y + 1].getHealth() - 1);
-
-        if (scene->grid[x][y + 1].getHealth() == 0) {
-            scene->grid[x][y + 1].setMaterial(Mats::Fire);
-            scene->grid[x][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x, y + 1) && scene->isCorrectMaterial(x, y + 1, Mats::Water)) {
-        scene->grid[x][y + 1].setHealth(scene->grid[x][y + 1].getHealth() - 1);
-
-        if (scene->grid[x][y + 1].getHealth() == 0) {
-            scene->grid[x][y + 1].setMaterial(Mats::Smoke);
-            scene->grid[x][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y + 1) && scene->isCorrectMaterial(x - 1, y + 1, Mats::Sand, Mats::Stone)) {
-        scene->grid[x - 1][y + 1].setHealth(scene->grid[x - 1][y + 1].getHealth() - 1);
-
-        if (scene->grid[x - 1][y + 1].getHealth() == 0) {
-            scene->grid[x - 1][y + 1].setMaterial(Mats::Lava);
-            scene->grid[x - 1][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y + 1) && scene->isCorrectMaterial(x - 1, y + 1, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
-        scene->grid[x - 1][y + 1].setHealth(scene->grid[x - 1][y + 1].getHealth() - 1);
-
-        if (scene->grid[x - 1][y + 1].getHealth() == 0) {
-            scene->grid[x - 1][y + 1].setMaterial(Mats::Fire);
-            scene->grid[x - 1][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y + 1) && scene->isCorrectMaterial(x - 1, y + 1, Mats::Water)) {
-        scene->grid[x - 1][y + 1].setHealth(scene->grid[x - 1][y + 1].getHealth() - 1);
-
-        if (scene->grid[x - 1][y + 1].getHealth() == 0) {
-            scene->grid[x - 1][y + 1].setMaterial(Mats::Smoke);
-            scene->grid[x - 1][y + 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y) && scene->isCorrectMaterial(x - 1, y, Mats::Sand, Mats::Stone)) {
-        scene->grid[x - 1][y].setHealth(scene->grid[x - 1][y].getHealth() - 1);
-
-        if (scene->grid[x - 1][y].getHealth() == 0) {
-            scene->grid[x - 1][y].setMaterial(Mats::Lava);
-            scene->grid[x - 1][y].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y) && scene->isCorrectMaterial(x - 1, y, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
-        scene->grid[x - 1][y].setHealth(scene->grid[x - 1][y].getHealth() - 1);
-
-        if (scene->grid[x - 1][y].getHealth() == 0) {
-            scene->grid[x - 1][y].setMaterial(Mats::Fire);
-            scene->grid[x - 1][y].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y) && scene->isCorrectMaterial(x - 1, y, Mats::Water)) {
-        scene->grid[x - 1][y].setHealth(scene->grid[x - 1][y].getHealth() - 1);
-
-        if (scene->grid[x - 1][y].getHealth() == 0) {
-            scene->grid[x - 1][y].setMaterial(Mats::Smoke);
-            scene->grid[x - 1][y].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y - 1) && scene->isCorrectMaterial(x - 1, y - 1, Mats::Sand, Mats::Stone)) {
-        scene->grid[x - 1][y - 1].setHealth(scene->grid[x - 1][y - 1].getHealth() - 1);
-
-        if (scene->grid[x - 1][y - 1].getHealth() == 0) {
-            scene->grid[x - 1][y - 1].setMaterial(Mats::Fire);
-            scene->grid[x - 1][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y - 1) && scene->isCorrectMaterial(x - 1, y - 1, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
-        scene->grid[x - 1][y - 1].setHealth(scene->grid[x - 1][y - 1].getHealth() - 1);
-
-        if (scene->grid[x - 1][y - 1].getHealth() == 0) {
-            scene->grid[x - 1][y - 1].setMaterial(Mats::Fire);
-            scene->grid[x - 1][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x - 1, y - 1) && scene->isCorrectMaterial(x - 1, y - 1, Mats::Water)) {
-        scene->grid[x - 1][y - 1].setHealth(scene->grid[x - 1][y - 1].getHealth() - 1);
-
-        if (scene->grid[x - 1][y - 1].getHealth() == 0) {
-            scene->grid[x - 1][y - 1].setMaterial(Mats::Smoke);
-            scene->grid[x - 1][y - 1].setUpdateStatus(true);
-        }
-    }
-
-    scene->grid[x][y].setHealth(scene->grid[x][y].getHealth() - 1);
-
-    if (scene->grid[x][y].getHealth() == 0) {
-        if (scene->grid[x][y].getMaterial() == Mats::Lava) {
-            scene->grid[x][y].setMaterial(Mats::DullLava);
-        } else if (scene->grid[x][y].getMaterial() == Mats::DullLava) {
-            scene->grid[x][y].setMaterial(Mats::Lava);
-        }
-    }
-
-    if (scene->isCorrectCoordinates(x, y - 1) &&
-        scene->isCorrectMaterial(x, y - 1, Mats::Metal)) {
-        scene->grid[x][y - 1].setHealth(scene->grid[x][y - 1].getHealth() - 2);
-
-        if (scene->grid[x][y - 1].getHealth() <= 0) {
-            scene->grid[x][y - 1].setMaterial(Mats::MoltenMetal);
-            scene->grid[x][y - 1].setHealth(100);
-            scene->grid[x][y - 1].setUpdateStatus(true);
-        }
-    }
-
+namespace Sandbox {
+void updateLava(Scene* scene, int x, int y) {
     for (int dx = -1; dx <= 1; dx++) {
         for (int dy = -1; dy <= 1; dy++) {
-            if (dx == 0 && dy == 0) continue;
+            if (dx == 0 && dy == 0) {
+                continue;
+            }
 
-            if (scene->isCorrectCoordinates(x+dx, y+dy) &&
-                scene->isCorrectMaterial(x+dx, y+dy, Mats::Metal)) {
-                scene->grid[x+dx][y+dy].setHealth(scene->grid[x+dx][y+dy].getHealth() - 1);
+            if (scene->isCorrectCoordinates(x + dx, y + dy)) {
+                if (scene->isCorrectMaterial(x + dx, y + dy, Mats::Sand, Mats::Stone)) {
+                    scene->getCell(x + dx, y + dy).setHealth(scene->getCell(x + dx, y + dy).getHealth() - 1);
 
-                if (scene->grid[x+dx][y+dy].getHealth() <= 0) {
-                    scene->grid[x+dx][y+dy].setMaterial(Mats::MoltenMetal);
-                    scene->grid[x+dx][y+dy].setHealth(100);
-                    scene->grid[x+dx][y+dy].setUpdateStatus(true);
+                    if (scene->getCell(x + dx, y + dy).getHealth() <= 0) {
+                        scene->getCell(x + dx, y + dy).setMaterial(Mats::Lava);
+                        scene->getCell(x + dx, y + dy).setUpdateStatus(true);
+                    }
+                } else if (scene->isCorrectMaterial(x + dx, y + dy, Mats::Wick, Mats::Gunpowder, Mats::Diesel)) {
+                    scene->getCell(x + dx, y + dy).setHealth(scene->getCell(x + dx, y + dy).getHealth() - 1);
+
+                    if (scene->getCell(x + dx, y + dy).getHealth() <= 0) {
+                        scene->getCell(x + dx, y + dy).setMaterial(Mats::Fire);
+                        scene->getCell(x + dx, y + dy).setUpdateStatus(true);
+                    }
+                } else if (scene->isCorrectMaterial(x + dx, y + dy, Mats::Water, Mats::Acid)) {
+                    scene->getCell(x + dx, y + dy).setHealth(scene->getCell(x + dx, y + dy).getHealth() - 1);
+
+                    if (scene->getCell(x + dx, y + dy).getHealth() <= 0) {
+                        scene->getCell(x + dx, y + dy).setMaterial(Mats::Smoke);
+                        scene->getCell(x + dx, y + dy).setUpdateStatus(true);
+                    }
+                } else if (scene->isCorrectMaterial(x + dx, y + dy, Mats::Metal)) {
+                    scene->getCell(x + dx, y + dy).setHealth(scene->getCell(x + dx, y + dy).getHealth() - 2);
+
+                    if (scene->getCell(x + dx, y + dy).getHealth() <= 0) {
+                        scene->getCell(x + dx, y + dy).setMaterial(Mats::MoltenMetal);
+                        scene->getCell(x + dx, y + dy).setUpdateStatus(true);
+                    }
                 }
             }
+        }
+    }
+
+    scene->getCell(x, y).setHealth(scene->getCell(x, y).getHealth() - 1);
+
+    if (scene->getCell(x, y).getHealth() <= 0) {
+        if (scene->getCell(x, y).getMaterial() == Mats::Lava) {
+            scene->getCell(x, y).setMaterial(Mats::DullLava);
+        } else if (scene->getCell(x, y).getMaterial() == Mats::DullLava) {
+            scene->getCell(x, y).setMaterial(Mats::Lava);
         }
     }
 
@@ -275,8 +72,9 @@ void Sandbox::updateLava(Scene* scene, int x, int y) {
         nextY = y;
     }
 
-    Cell::swap(scene->grid[x][y], scene->grid[nextX][nextY]);
+    Cell::swap(scene->getCell(x, y), scene->getCell(nextX, nextY));
 
-    scene->grid[x][y].setUpdateStatus(false);
-    scene->grid[nextX][nextY].setUpdateStatus(true);
+    scene->getCell(x, y).setUpdateStatus(false);
+    scene->getCell(nextX, nextY).setUpdateStatus(true);
+}
 }

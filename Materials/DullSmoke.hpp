@@ -12,4 +12,4 @@ const Material DULLSMOKE = {
     /*updateFunc*/ updateSmoke
 };
 
-}
+}  // namespace Sandbox

@@ -12,4 +12,4 @@ const Material DULLACID = {
     /*updateFunc*/ updateAcid
 };
 
-}
+}  // namespace Sandbox

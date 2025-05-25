@@ -14,4 +14,4 @@ const Material NONE = {
     /*updateFunc*/ updateNone
 };
 
-}
+}  // namespace Sandbox

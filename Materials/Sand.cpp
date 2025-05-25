@@ -1,23 +1,27 @@
 #include "Stone.hpp"
 #include "Sand.hpp"
 
-void Sandbox::updateSand(Scene* scene, int x, int y) {
+namespace Sandbox {
+
+void updateSand(Scene* scene, int x, int y) {
     int nextX = x;
     int nextY = y;
 
-    if (scene->isCorrectCoordinates(x, y + 1) && scene->isCorrectMaterial(x, y + 1, Mats::None, Mats::Water, Mats::Diesel)) {
+    if (scene->isCorrectCoordinates(x, y + 1) && scene->isCorrectMaterial(x, y + 1, Mats::None, Mats::Water, Mats::Diesel, Mats::Acid)) {
         nextX = x;
         nextY = y + 1;
-    } else if (scene->isCorrectCoordinates(x + 1, y + 1) && scene->isCorrectMaterial(x + 1, y + 1, Mats::None, Mats::Water, Mats::Diesel)) {
+    } else if (scene->isCorrectCoordinates(x + 1, y + 1) && scene->isCorrectMaterial(x + 1, y + 1, Mats::None, Mats::Water, Mats::Diesel, Mats::Acid)) {
         nextX = x + 1;
         nextY = y + 1;
-    } else if (scene->isCorrectCoordinates(x - 1, y + 1) && scene->isCorrectMaterial(x - 1, y + 1, Mats::None, Mats::Water, Mats::Diesel)) {
+    } else if (scene->isCorrectCoordinates(x - 1, y + 1) && scene->isCorrectMaterial(x - 1, y + 1, Mats::None, Mats::Water, Mats::Diesel, Mats::Acid)) {
         nextX = x - 1;
         nextY = y + 1;
     }
 
-    Cell::swap(scene->grid[x][y], scene->grid[nextX][nextY]);
+    Cell::swap(scene->getCell(x, y), scene->getCell(nextX, nextY));
 
-    scene->grid[x][y].setUpdateStatus(false);
-    scene->grid[nextX][nextY].setUpdateStatus(true);
+    scene->getCell(x, y).setUpdateStatus(false);
+    scene->getCell(nextX, nextY).setUpdateStatus(true);
+}
+
 }

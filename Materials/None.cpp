@@ -1,4 +1,8 @@
 #include "None.hpp"
 
-void Sandbox::updateNone(Scene* scene, int x, int y) {
+namespace Sandbox {
+
+void updateNone(Scene* scene, int x, int y) {
 }
+
+}  // namespace Sandbox

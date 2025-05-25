@@ -14,4 +14,4 @@ const Material FIRE = {
     /*updateFunc*/ updateFire
 };
 
-}
+}  // namespace Sandbox

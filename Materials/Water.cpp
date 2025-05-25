@@ -1,6 +1,7 @@
 #include "Water.hpp"
 
-void Sandbox::updateWater(Scene* scene, int x, int y) {
+namespace Sandbox {
+void updateWater(Scene* scene, int x, int y) {
     int nextX = x;
     int nextY = y;
 
@@ -21,8 +22,9 @@ void Sandbox::updateWater(Scene* scene, int x, int y) {
         nextY = y;
     }
 
-    Cell::swap(scene->grid[x][y], scene->grid[nextX][nextY]);
+    Cell::swap(scene->getCell(x, y), scene->getCell(nextX, nextY));
 
-    scene->grid[x][y].setUpdateStatus(false);
-    scene->grid[nextX][nextY].setUpdateStatus(true);
+    scene->getCell(x, y).setUpdateStatus(false);
+    scene->getCell(nextX, nextY).setUpdateStatus(true);
+}
 }

@@ -1,6 +1,6 @@
 #pragma once
-#include "Material.hpp"
 #include <SFML/Graphics.hpp>
+#include "Material.hpp"
 
 namespace Sandbox {
 
@@ -14,4 +14,4 @@ const Material RUST = {
     /*updateFunc*/ updateRust
 };
 
-}
+}  // namespace Sandbox

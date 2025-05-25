@@ -14,4 +14,4 @@ const Material METAL = {
     /*updateFunc*/ updateMetal
 };
 
-}
+}  // namespace Sandbox

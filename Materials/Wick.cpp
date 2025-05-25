@@ -1,4 +1,8 @@
 #include "Wick.hpp"
 
-void Sandbox::updateWick(Scene* scene, int x, int y) {
+namespace Sandbox {
+
+void updateWick(Scene* scene, int x, int y) {
+}
+
 }

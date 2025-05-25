@@ -22,7 +22,8 @@ void Scene::update() {
                 grid[x][y].setUpdateStatus(false);
                 continue;
             }
-            getMaterialProperties(grid[x][y].getMaterial())->updateFunc(this, x, y);            
+
+            getMaterialProperties(grid[x][y].getMaterial())->updateFunc(this, x, y);
         }
     }
 }

@@ -12,4 +12,4 @@ const Material DULLLAVA = {
     /*updateFunc*/ updateLava
 };
 
-}
+}  // namespace Sandbox

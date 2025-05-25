@@ -14,4 +14,4 @@ const Material LAVA = {
     /*updateFunc*/ updateLava
 };
 
-}
+}  // namespace Sandbox

@@ -14,4 +14,4 @@ const Material DIESEL = {
     /*updateFunc*/ updateDiesel
 };
 
-}
+}  // namespace Sandbox

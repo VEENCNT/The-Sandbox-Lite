@@ -12,4 +12,4 @@ const Material DULLFIRE = {
     /*updateFunc*/ updateFire
 };
 
-}
+}  // namespace Sandbox

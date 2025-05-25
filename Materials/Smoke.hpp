@@ -1,7 +1,7 @@
 #pragma once
-#include "Material.hpp"
-#include "../include/Scene.hpp"
 #include <SFML/Graphics.hpp>
+#include "../include/Scene.hpp"
+#include "Material.hpp"
 
 namespace Sandbox {
 
@@ -15,4 +15,4 @@ const Material SMOKE = {
     /*updateFunc*/ updateSmoke
 };
 
-}
+}  // namespace Sandbox

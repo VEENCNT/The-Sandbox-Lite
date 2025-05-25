@@ -15,7 +15,7 @@ class Scene : public sf::Drawable {
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-    inline Cell& getElement(int x, int y);
+    inline Cell& getCell(int x, int y);
 
     static const int kDefaultWidth = 128;
     static const int kDefaultHeight = 90;
@@ -25,10 +25,12 @@ class Scene : public sf::Drawable {
     template<typename... Args>
     inline bool isCorrectMaterial(int x, int y, const Mats& material, const Args&... args);
     bool checkNeighborsForMaterial(int x, int y, const Mats mat);
+
+ private:
     Cell grid[kDefaultWidth][kDefaultHeight];
 };
 
-inline Cell& Scene::getElement(int x, int y) {
+inline Cell& Scene::getCell(int x, int y) {
     return grid[x][y];
 }
 
@@ -43,9 +45,9 @@ inline bool Scene::isCorrectMaterial(int x, int y) {
 inline bool Scene::checkNeighborsForMaterial(int x, int y, const Mats mat) {
     for (int dx = -1; dx <= 1; dx++) {
         for (int dy = -1; dy <= 1; dy++) {
-            if (dx == 0 && dy == 0) continue;
-            if (isCorrectCoordinates(x + dx, y + dy) &&
-                grid[x + dx][y + dy].getMaterial() == mat) {
+            if (dx == 0 && dy == 0)
+                continue;
+            if (isCorrectCoordinates(x + dx, y + dy) && grid[x + dx][y + dy].getMaterial() == mat) {
                 return true;
             }
         }

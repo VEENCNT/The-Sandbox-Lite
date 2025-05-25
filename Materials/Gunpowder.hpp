@@ -14,4 +14,4 @@ const Material GUNPOWDER = {
     /*updateFunc*/ updateGunpowder
 };
 
-}
+}  // namespace Sandbox

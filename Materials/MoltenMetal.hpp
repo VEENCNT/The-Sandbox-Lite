@@ -14,4 +14,4 @@ const Material MOLTENMETAL = {
     /*updateFunc*/ updateMoltenMetal
 };
 
-}
+}  // namespace Sandbox

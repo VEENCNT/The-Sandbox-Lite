@@ -102,7 +102,7 @@ int main() {
             int j = mousePosition.y / Sandbox::Cell::kDefaultHeight;
 
             if (i > 0 && i < Sandbox::Scene::kDefaultWidth && j > 0 && j < Sandbox::Scene::kDefaultHeight) {
-                scene.getElement(i, j).setMaterial(brushMaterial);
+                scene.getCell(i, j).setMaterial(brushMaterial);
             }
         }
 
@@ -113,7 +113,7 @@ int main() {
             int j = mousePosition.y / Sandbox::Cell::kDefaultHeight;
 
             if (i > 0 && i < Sandbox::Scene::kDefaultWidth && j > 0 && j < Sandbox::Scene::kDefaultHeight) {
-                scene.getElement(i, j).setMaterial(Sandbox::Mats::None);
+                scene.getCell(i, j).setMaterial(Sandbox::Mats::None);
             }
         }
 
