@@ -20,22 +20,10 @@ class Scene : public sf::Drawable {
     static const int kDefaultWidth = 128;
     static const int kDefaultHeight = 90;
 
- private:
-    void updateSand(int x, int y);
-    void updateWater(int x, int y);
-    void updateGunpowder(int x, int y);
-	void updateDiesel(int x, int y);
-    void updateFire(int x, int y);
-	void updateLava(int x, int y);
-    void updateSmoke(int x, int y);
-
-	inline bool isCorrectCoordinates(int x, int y);
-
+    inline bool isCorrectCoordinates(int x, int y);
     inline bool isCorrectMaterial(int x, int y);
-
     template<typename... Args>
-    inline bool isCorrectMaterial(int x, int y, const Material& material, const Args&... args);
-
+    inline bool isCorrectMaterial(int x, int y, const Mats& material, const Args&... args);
     Cell grid[kDefaultWidth][kDefaultHeight];
 };
 
@@ -52,7 +40,7 @@ inline bool Scene::isCorrectMaterial(int x, int y) {
 }
 
 template<typename... Args>
-inline bool Scene::isCorrectMaterial(int x, int y, const Material& material, const Args&... args) {
+inline bool Scene::isCorrectMaterial(int x, int y, const Mats& material, const Args&... args) {
     return (grid[x][y].getMaterial() == material) || (isCorrectMaterial(x, y, args...));
 }
 }  // namespace Sandbox

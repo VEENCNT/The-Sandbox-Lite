@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 namespace Sandbox {
-enum Material {
+enum Mats : int {
     Stone = 1,
     Sand,
     Water,
@@ -23,8 +23,8 @@ class Cell : public sf::Drawable, public sf::Transformable {
  public:
     Cell();
 
-    inline const Material& getMaterial() const;
-    void setMaterial(const Material& material);
+    inline const Mats& getMaterial() const;
+    void setMaterial(const Mats& material);
 
     inline bool getUpdateStatus() const;
     void setUpdateStatus(bool isUpdated);
@@ -41,14 +41,14 @@ class Cell : public sf::Drawable, public sf::Transformable {
 
  private:
     sf::RectangleShape shape;
-    Material material;
+    Mats material;
 
     bool isUpdated;
 
     int health;
 };
 
-inline const Material& Cell::getMaterial() const {
+inline const Mats& Cell::getMaterial() const {
     return material;
 }
 
