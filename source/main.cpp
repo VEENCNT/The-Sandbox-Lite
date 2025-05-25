@@ -85,6 +85,11 @@ int main() {
             brushInfo.setString("Smoke");
         }
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F10)) {
+            brushMaterial = Sandbox::Material::Acid;
+            brushInfo.setString("Acid");
+        }
+
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
