@@ -16,6 +16,8 @@ enum Material {
     DullLava,
     Smoke,
     DullSmoke,
+    Acid,
+    DullAcid,
     None
 };
 

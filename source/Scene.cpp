@@ -57,6 +57,12 @@ void Scene::update() {
                 case Material::DullSmoke:
                     updateSmoke(x, y);
                     break;
+                case Material::Acid:
+                    updateAcid(x, y);
+                    break;
+                case Material::DullAcid:
+                    updateAcid(x, y);
+                    break;
                 default:
                     break;
             }
@@ -625,5 +631,85 @@ void Scene::updateSmoke(int x, int y) {
 
     grid[x][y].setUpdateStatus(false);
     grid[nextX][nextY].setUpdateStatus(true);
+}
+
+void Scene::updateAcid(int x, int y) {
+    bool contactWithLava = false;
+
+    for(int dx = -1; dx <= 1; dx++) {
+        for(int dy = -1; dy <= 1; dy++) {
+            if(dx == 0 && dy == 0) continue;
+
+            if(isCorrectCoordinates(x+dx, y+dy)) {
+                Cell& neighbor = grid[x+dx][y+dy];
+
+                if(neighbor.getMaterial() == Material::Lava ||
+                   neighbor.getMaterial() == Material::DullLava) {
+                    contactWithLava = true;
+                }
+            }
+        }
+    }
+
+    if(contactWithLava) {
+        grid[x][y].setHealth(grid[x][y].getHealth() - 20);
+    } else {
+        grid[x][y].setHealth(grid[x][y].getHealth() - 1);
+    }
+
+    if(grid[x][y].getHealth() <= 0) {
+        grid[x][y].setMaterial(Material::Smoke);
+        grid[x][y].setUpdateStatus(true);
+        return;
+    }
+
+    constexpr Material corrosive[] = {Material::Stone, Material::Wick, Material::Gunpowder};
+    for(int dx = -1; dx <= 1; dx++) {
+        for(int dy = -1; dy <= 1; dy++) {
+            if(dx == 0 && dy == 0) continue;
+
+            if(isCorrectCoordinates(x+dx, y+dy)) {
+                Cell& neighbor = grid[x+dx][y+dy];
+                for(auto mat : corrosive) {
+                    if(neighbor.getMaterial() == mat) {
+                        neighbor.setHealth(neighbor.getHealth() - 5);
+                        if(neighbor.getHealth() <= 0) {
+                            neighbor.setMaterial(Material::None);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    int nextX = x;
+    int nextY = y;
+
+    if (isCorrectCoordinates(x, y + 1) && isCorrectMaterial(x, y + 1, Material::None)) {
+        nextX = x;
+        nextY = y + 1;
+    } else if (isCorrectCoordinates(x + 1, y + 1) && isCorrectMaterial(x + 1, y + 1, Material::None)) {
+        nextX = x + 1;
+        nextY = y + 1;
+    } else if (isCorrectCoordinates(x - 1, y + 1) && isCorrectMaterial(x - 1, y + 1, Material::None)) {
+        nextX = x - 1;
+        nextY = y + 1;
+    } else if (isCorrectCoordinates(x + 1, y) && isCorrectMaterial(x + 1, y, Material::None)) {
+        nextX = x + 1;
+        nextY = y;
+    } else if (isCorrectCoordinates(x - 1, y) && isCorrectMaterial(x - 1, y, Material::None)) {
+        nextX = x - 1;
+        nextY = y;
+    }
+
+    Cell::swap(grid[x][y], grid[nextX][nextY]);
+
+    grid[x][y].setUpdateStatus(false);
+    grid[nextX][nextY].setUpdateStatus(true);
+
+    grid[nextX][nextY].setHealth(grid[nextX][nextY].getHealth() - 1);
+    if(grid[nextX][nextY].getHealth() <= 0) {
+        grid[nextX][nextY].setMaterial(Material::None);
+    }
 }
 }  // namespace Sandbox
