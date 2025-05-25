@@ -20,6 +20,8 @@ void Sandbox::updateAcid(Scene* scene, int x, int y) {
 
     if(contactWithLava) {
         scene->grid[x][y].setHealth(scene->grid[x][y].getHealth() - 20);
+    } else {
+        scene->grid[x][y].setHealth(scene->grid[x][y].getHealth() - 1);
     }
 
     if(scene->grid[x][y].getHealth() <= 0) {
@@ -72,6 +74,7 @@ void Sandbox::updateAcid(Scene* scene, int x, int y) {
     scene->grid[x][y].setUpdateStatus(false);
     scene->grid[nextX][nextY].setUpdateStatus(true);
 
+    scene->grid[nextX][nextY].setHealth(scene->grid[nextX][nextY].getHealth() - 1);
     if(scene->grid[nextX][nextY].getHealth() <= 0) {
         scene->grid[nextX][nextY].setMaterial(Mats::None);
     }
